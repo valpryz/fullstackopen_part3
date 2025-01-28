@@ -53,11 +53,21 @@ app.delete("/api/persons/:id", (request, response) => {
 })
 
 app.post("/api/persons", (request, response) => {
-    const phone = request.body
-    phone.id = String(Math.ceil(Math.random() * 10000))
+    const body = request.body
+    body.id = String(Math.ceil(Math.random() * 10000))
 
-    phoneNumbers = phoneNumbers.concat(phone)
-    response.json(phone)
+    if(!body.name || !body.number){
+        return response.status(400).json({
+            error: "Content missing !"
+        })
+    }else if(phoneNumbers.some(number => number.name.toLowerCase() === body.name.toLowerCase())){
+        return response.status(400).json({
+            error: "Name must be unique !"
+        })
+    }else {
+        phoneNumbers = phoneNumbers.concat(body)
+        response.json(body)
+    }
 })
 
 
