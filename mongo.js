@@ -9,7 +9,7 @@ if(process.argv.length < 3){
     process.exit(1)
 }
 
-const url = `mongodb+srv://valpryz:${password}@fullstackopen0.ukvrd.mongodb.net/?retryWrites=true&w=majority&appName=fullstackopen0`
+const url = `mongodb+srv://valpryz:${password}@fullstackopen0.ukvrd.mongodb.net/personApp?retryWrites=true&w=majority&appName=fullstackopen0`
 
 mongoose.set('strictQuery', false)
 mongoose.connect(url)
