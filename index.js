@@ -78,8 +78,14 @@ app.post("/api/persons", (request, response) => {
             error: "Name must be unique !"
         })
     }else {
-        phoneNumbers = phoneNumbers.concat(body)
-        response.json(body)
+        const person = new Person({
+            name: body.name,
+            number: body.number
+        })
+
+        person.save().then(savedPerson => {
+            response.json(savedPerson)
+        })
     }
 })
 
